@@ -27,6 +27,9 @@ mSchema.pre("save",async (e) => {
     this.password=await bcrypt.hash(this.password,salt)
 })
 
+mSchema.methods.matchPass=async function (enterpass) {
+    return await bcrypt.compare(enterpass,this.password)
+}
 
 const user=mongoose.model("soinin",mSchema)
 
