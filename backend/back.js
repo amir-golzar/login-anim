@@ -22,19 +22,29 @@ const mSchema = mongoose.Schema({
   password: { type: "String", required: true },
 });
 
-mSchema.pre("save",async (e) => {
-    const salt=await bcrypt.genSalt(12)
-    this.password=await bcrypt.hash(this.password,salt)
-})
+mSchema.pre("save", async (e) => {
+  const salt = await bcrypt.genSalt(12);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
-mSchema.methods.matchPass=async function (enterpass) {
-    return await bcrypt.compare(enterpass,this.password)
-}
+mSchema.methods.matchPass = async function (enterpass) {
+  return await bcrypt.compare(enterpass, this.password);
+};
 
-const user=mongoose.model("soinin",mSchema)
+const User = mongoose.model("soinin", mSchema);
 
 app.post("/soinin", (req, res) => {
-  res.json("kir");
+    const { userName, email, password } = req.body;
+
+    const newUser = new User({ userName, email, password });
+    newUser
+      .save()
+      .then((data) => {
+        res.json({ message: "user is saved", status: "ok" });
+      })
+      .catch((err) => {
+        res.json({ message: "user is not save", status: "oky" });
+      });
 });
 
 app.listen(process.env.PORT);
