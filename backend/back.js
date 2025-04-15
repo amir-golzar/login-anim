@@ -33,7 +33,7 @@ mSchema.methods.matchPass = async function (enterpass) {
 
 const User = mongoose.model("soinin", mSchema);
 
-app.post("/soinin", (req, res) => {
+app.post("/signup", (req, res) => {
     const { userName, email, password } = req.body;
 
     const newUser = new User({ userName, email, password });

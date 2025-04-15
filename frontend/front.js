@@ -1,3 +1,5 @@
+const { json } = require("body-parser");
+
 const form = document.getElementById("dale");
 
 form.addEventListener("submit", async (e) => {
@@ -11,5 +13,6 @@ form.addEventListener("submit", async (e) => {
   const response = await fetch("http://127.0.01:5500/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
   });
 });
