@@ -9,6 +9,7 @@ const cors = require("cors");
 const body = require("body-parser");
 
 const env = require("dotenv");
+const e = require("express");
 env.config();
 
 const app = express();
@@ -34,7 +35,7 @@ const User = mongoose.model("sing", cshema);
 app.post("/sing", (req, res) => {
   const { name, email, password } = req.body;
 
-  const newUser = new User({ userName:name, email, password });
+  const newUser = new User({ userName: name, email, password });
 
   newUser
     .save()
@@ -46,4 +47,14 @@ app.post("/sing", (req, res) => {
     });
 });
 
+app.head("/tocen", async (req, res) => {
+  const { email } = req.body;
+
+  const faid = await User.findOne({ email: email });
+  if (faid) {
+    const tocen = gt(faid._id);
+    res.json(tocen);
+    console.log(tocen);
+  }
+});
 app.listen(process.env.PORT);

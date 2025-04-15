@@ -3,10 +3,10 @@ const form = document.getElementById("dale");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log("dsfaddsf");
-  
+
   const name = e.target.name.value;
   console.log(name);
-  
+
   const email = e.target.email.value;
   const password = e.target.password.value;
 
