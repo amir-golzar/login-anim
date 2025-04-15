@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 
 const form = document.getElementById("dale");
 
@@ -15,4 +14,11 @@ form.addEventListener("submit", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+  const result = await response.json();
+  alert(result.message);
+
+  if ((data.name == "", data.email == "", data.password == "")) {
+    alert("form ra por konid");
+    return;
+  }
 });
