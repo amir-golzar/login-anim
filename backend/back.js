@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-// const gt = require("./jwt/gt");
+const gt = require("./jwt/GT");
 
 const express = require("express");
 const cors = require("cors");
@@ -24,14 +24,17 @@ const cshema = mongoose.Schema({
   password: "String",
 });
 
-
+cshema.pre("save", async function () {
+  const salt = await bcrypt.genSalt(12);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model("sing", cshema);
 
 app.post("/sing", (req, res) => {
-  const { userName, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-  const newUser = new User({ userName, email, password });
+  const newUser = new User({ userName:name, email, password });
 
   newUser
     .save()

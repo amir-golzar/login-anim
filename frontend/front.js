@@ -1,15 +1,18 @@
-
 const form = document.getElementById("dale");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  console.log("dsfaddsf");
+  
+  const name = e.target.name.value;
+  console.log(name);
+  
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
   const data = { name, email, password };
 
-  const response = await fetch("http://127.0.01:5500/signup", {
+  const response = await fetch("http://127.0.0.1:5500/sing", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
