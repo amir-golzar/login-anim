@@ -1,5 +1,12 @@
 const form = document.getElementById("dale");
 
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log("dsfaddsf");
@@ -17,8 +24,12 @@ form.addEventListener("submit", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  const result = await response.json();
-  alert(result.message);
+  
+  const {message,token} = await response.json();
+  alert(message);
+  console.log(token);
+  setCookie("tokenjwt",token,30);
+
 
   if ((data.name == "", data.email == "", data.password == "")) {
     alert("form ra por konid");

@@ -36,11 +36,14 @@ app.post("/sing", (req, res) => {
   const { name, email, password } = req.body;
 
   const newUser = new User({ userName: name, email, password });
+  console.log(newUser);
+  console.log(newUser._id);
 
   newUser
     .save()
     .then(() => {
-      res.json({ message: "are" });
+      const jwt = gt(newUser._id);
+      res.json({ message: "are", token: jwt });
     })
     .catch((e) => {
       res.send(501).json({ message: "na" });
@@ -64,10 +67,11 @@ app.get("/corokodil", async (req, res) => {
   console.log(decode);
 
   const find = await User.findById(decode.id, {
-    userName: 1,
-    email: 1,
+    userName: true,
+    email: true,
     _id: false,
   });
+
   console.log(find);
   res.json(find);
 });
