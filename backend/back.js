@@ -57,4 +57,18 @@ app.head("/tocen", async (req, res) => {
     console.log(tocen);
   }
 });
+app.get("/corokodil", async (req, res) => {
+  const token = req.headers.authorization;
+
+  const decode = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(decode);
+
+  const find = await User.findById(decode.id, {
+    userName: 1,
+    email: 1,
+    _id: false,
+  });
+  console.log(find);
+  res.json(find);
+});
 app.listen(process.env.PORT);
