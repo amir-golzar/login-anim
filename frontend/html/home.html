@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .logo {
+        width: 65px;
+        height: 65px;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.315), rgb(0, 0, 0));
+        box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2),
+          -8px -8px 16px rgba(255, 255, 255, 0.06);
+        border-radius: 20px;
+        border: 2px solid #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .logo::before {
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        width: 50%;
+        height: 20%;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border: 2.5px solid #ffffff;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        width: 30%;
+        height: 30%;
+        border-radius: 50%;
+        border: 2.5px solid #ffffff;
+      }
+      a {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="logo"></a>
+  </body>
+</html>

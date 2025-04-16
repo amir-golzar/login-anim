@@ -24,4 +24,8 @@ form.addEventListener("submit", async (e) => {
     alert("form ra por konid");
     return;
   }
+console.log(window.location);
+  window.location.replace(
+    window.location.href.replace("frontend/html/index.html","frontend/html/home.html")
+  );
 });
