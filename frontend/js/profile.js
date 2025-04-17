@@ -29,16 +29,24 @@ function jkjk(e) {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      info(data.userName, data.email);
     });
-  info();
 }
 
 logo.addEventListener("click", jkjk);
-function info(e) {
+function info(uname, uemail) {
   const cart = document.createElement("div");
   cart.classList.add("cart");
-  
 
+  const name = document.createElement("div");
+  name.innerText = `your user name is:${uname}`;
+  name.classList.add("uname");
+  const email = document.createElement("div");
+  email.innerText = `your email is: ${uemail}`;
+  email.classList.add("uname");
+
+  cart.appendChild(name);
+  cart.appendChild(email);
   document.body.appendChild(cart);
   console.log(cart);
   logo.removeEventListener("click", jkjk);
