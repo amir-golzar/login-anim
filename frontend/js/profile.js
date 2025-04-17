@@ -17,17 +17,34 @@ function getCookie(cname) {
   return "";
 }
 
-logo.addEventListener("click", function (e) {
-    let token = getCookie("tokenjwt")
+function jkjk(e) {
+  let token = getCookie("tokenjwt");
   const option = {
     method: "GET",
     headers: {
-        authorization: token,
+      authorization: token,
     },
   };
-  fetch(url, option).then((res) => res.json()).then((data) => {
-    console.log(data);
-    
-    
+  fetch(url, option)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
+  info();
+}
+
+logo.addEventListener("click", jkjk);
+function info(e) {
+  const cart = document.createElement("div");
+  cart.classList.add("cart");
+  
+
+  document.body.appendChild(cart);
+  console.log(cart);
+  logo.removeEventListener("click", jkjk);
+  logo.addEventListener("click", function (e) {
+    cart.remove();
+    logo.addEventListener("click", jkjk);
+    logo.removeEventListener("click", this);
   });
-});
+}
