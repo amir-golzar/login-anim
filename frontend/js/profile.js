@@ -1,3 +1,17 @@
+window.addEventListener("DOMContentLoaded", (e) => {
+  let token = getCookie("tokenjwt");
+  if (!token) {
+    console.log(23);
+    window.location.replace(
+      window.location.href.replace(
+        "frontend/html/home.html",
+        "frontend/html/index.html"
+      )
+    );
+    return;
+  }
+});
+
 const logo = document.getElementById("logo");
 
 const url = "http://127.0.0.1:5500/corokodil";
@@ -14,7 +28,7 @@ function getCookie(cname) {
       return c.substring(name.length, c.length);
     }
   }
-  return "";
+  return null;
 }
 
 function jkjk(e) {
@@ -30,7 +44,8 @@ function jkjk(e) {
     .then((data) => {
       console.log(data);
       info(data.userName, data.email);
-    });
+    })
+    .catch();
 }
 
 logo.addEventListener("click", jkjk);
@@ -39,10 +54,10 @@ function info(uname, uemail) {
   cart.classList.add("cart");
 
   const name = document.createElement("div");
-  name.innerText = `your user name is:${uname}`;
+  name.innerText = `your user name is : ${uname}`;
   name.classList.add("uname");
   const email = document.createElement("div");
-  email.innerText = `your email is: ${uemail}`;
+  email.innerText = `your email is : ${uemail}`;
   email.classList.add("uname");
 
   cart.appendChild(name);
