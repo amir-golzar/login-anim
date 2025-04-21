@@ -19,7 +19,7 @@ app.use(body.json());
 mongoose.connect("mongodb://127.0.0.1:27017/admin");
 
 const cshema = mongoose.Schema({
-  userName: "String",
+  name: "String",
   email: "String",
   password: "String",
 });
@@ -38,7 +38,7 @@ const User = mongoose.model("sing", cshema);
 app.post("/sing", (req, res) => {
   const { name, email, password } = req.body;
 
-  const newUser = new User({ userName: name, email, password });
+  const newUser = new User({ name, email, password });
   console.log(newUser);
   console.log(newUser._id);
 
@@ -69,7 +69,7 @@ app.get("/profile", async (req, res) => {
   console.log(decode);
 
   const find = await User.findById(decode.id, {
-    userName: true,
+    name: true,
     email: true,
     _id: false,
   });
@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const findHuman = await User.findOne({ email });
   if (!findHuman) {
-    res.status(404).json({ message: "kir shodi" });
+    res.status(404).json({ message: "kir shodi" ,status:404});
     return;
   }
   const decode = await findHuman.matchPass(password);
@@ -92,7 +92,6 @@ app.post("/login", async (req, res) => {
     res.json({ message: "are", token: jwt });
   }
   console.log(findHuman);
-  
 });
 
 app.listen(process.env.PORT);

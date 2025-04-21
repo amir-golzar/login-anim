@@ -43,25 +43,25 @@ function jkjk(e) {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      info(data.userName, data.email);
+      info(data.name, data.email);
     })
     .catch();
 }
 
 logo.addEventListener("click", jkjk);
-function info(uname, uemail) {
+function info(name, email) {
   const cart = document.createElement("div");
   cart.classList.add("cart");
 
-  const name = document.createElement("div");
-  name.innerText = `your user name is : ${uname}`;
-  name.classList.add("uname");
-  const email = document.createElement("div");
-  email.innerText = `your email is : ${uemail}`;
-  email.classList.add("uname");
+  const namee = document.createElement("div");
+  namee.innerText = `your user name is : ${name}`;
+  namee.classList.add("uname");
+  const emaill = document.createElement("div");
+  emaill.innerText = `your email is : ${email}`;
+  emaill.classList.add("uname");
 
-  cart.appendChild(name);
-  cart.appendChild(email);
+  cart.appendChild(namee);
+  cart.appendChild(emaill);
   document.body.appendChild(cart);
   console.log(cart);
   logo.removeEventListener("click", jkjk);

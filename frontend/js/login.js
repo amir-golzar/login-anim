@@ -9,7 +9,7 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-const url = "http://127.0.0.1:5500/sing";
+const url = "http://127.0.0.1:5500/login";
 
 async function submit(e) {
   e.preventDefault();
@@ -25,8 +25,12 @@ async function submit(e) {
     body: JSON.stringify(data),
   });
 
-  const { message, token } = await response.json();
-  alert(message);
+  const { status, token } = await response.json();
+
+  if (status === 404) {
+    return alert("users is not find");
+  }
+
   console.log(token);
 
   setCookie("tokenjwt", token, 30);
