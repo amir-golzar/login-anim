@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
 const logo = document.getElementById("logo");
 
-const url = "http://127.0.0.1:5500/corokodil";
+const url = "http://127.0.0.1:5500/profile";
 
 function getCookie(cname) {
   let name = cname + "=";

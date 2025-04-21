@@ -48,7 +48,6 @@ app.post("/sing", (req, res) => {
       res.send(501).json({ message: "na" });
     });
 });
-
 app.head("/tocen", async (req, res) => {
   const { email } = req.body;
 
@@ -59,7 +58,7 @@ app.head("/tocen", async (req, res) => {
     console.log(tocen);
   }
 });
-app.get("/corokodil", async (req, res) => {
+app.get("/profile", async (req, res) => {
   const token = req.headers.authorization;
 
   const decode = jwt.verify(token, process.env.JWT_SECRET);
@@ -74,4 +73,10 @@ app.get("/corokodil", async (req, res) => {
   console.log(find);
   res.json(find);
 });
+
+app.post("/login",async (req,res) => {
+  const {email}=req.body
+
+  
+})
 app.listen(process.env.PORT);
