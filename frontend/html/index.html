@@ -8,6 +8,32 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <script>
+      function getCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return null;
+      }
+      let token = getCookie("tokenjwt");
+      if (token) {
+        console.log(23);
+        window.location.replace(
+          window.location.href.replace(
+            "frontend/html/index.html",
+            "frontend/html/home.html"
+          )
+        );
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -15,11 +41,11 @@
         <form id="loginform" action="#">
           <h1>Login</h1>
           <div class="input-box">
-            <input name="email" type="email" placeholder="Enter your email"  />
+            <input name="email" type="email" placeholder="Enter your email" />
             <i class="bx bxs-user"></i>
           </div>
           <div class="input-box">
-            <input type="text" name="password" placeholder="Password"  />
+            <input type="text" name="password" placeholder="Password" />
             <i class="bx bxs-lock-alt"></i>
           </div>
           <div class="forgot-link">
@@ -48,7 +74,12 @@
             <i class="bx bxs-envelope"></i>
           </div>
           <div class="input-box">
-            <input type="text" name="password" placeholder="Password" required />
+            <input
+              type="text"
+              name="password"
+              placeholder="Password"
+              required
+            />
             <i class="bx bxs-lock-alt"></i>
           </div>
           <button type="submit" class="btn">sign up</button>
