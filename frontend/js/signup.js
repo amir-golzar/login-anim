@@ -7,6 +7,7 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log("dsfaddsf");

@@ -91,6 +91,8 @@ app.post("/login", async (req, res) => {
     const jwt = gt(findHuman._id);
     res.json({ message: "are", token: jwt });
   }
+  console.log(findHuman);
+  
 });
 
 app.listen(process.env.PORT);
