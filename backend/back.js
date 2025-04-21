@@ -29,6 +29,10 @@ cshema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+cshema.methods.matchPass = async function (enteredPass) {
+  return await bcrypt.compare(enteredPass, this.password);
+};
+
 const User = mongoose.model("sing", cshema);
 
 app.post("/sing", (req, res) => {
@@ -73,10 +77,19 @@ app.get("/profile", async (req, res) => {
   console.log(find);
   res.json(find);
 });
-
-app.post("/login",async (req,res) => {
-  const {email}=req.body
-
+app.post("/login", async (req, res) => {
+  const {email,password} = req.body;
+  const findIndex = await User.findOne({ email });
+  if (!findIndex) {
+    res.status(404).json({message:"kir shodi"})
+    return
+  }
+  const decode = await findIndex.matchPass(password);
   
-})
+  if (decode) {
+    res.json({message:"kir nashodi"})
+    console.log(decode);
+  }
+});
+
 app.listen(process.env.PORT);
