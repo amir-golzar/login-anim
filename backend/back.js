@@ -78,17 +78,18 @@ app.get("/profile", async (req, res) => {
   res.json(find);
 });
 app.post("/login", async (req, res) => {
-  const {email,password} = req.body;
-  const findIndex = await User.findOne({ email });
-  if (!findIndex) {
-    res.status(404).json({message:"kir shodi"})
-    return
+  const { email, password } = req.body;
+  const findHuman = await User.findOne({ email });
+  if (!findHuman) {
+    res.status(404).json({ message: "kir shodi" });
+    return;
   }
-  const decode = await findIndex.matchPass(password);
-  
+  const decode = await findHuman.matchPass(password);
+
   if (decode) {
-    res.json({message:"kir nashodi"})
     console.log(decode);
+    const jwt = gt(findHuman._id);
+    res.json({ message: "are", token: jwt });
   }
 });
 
