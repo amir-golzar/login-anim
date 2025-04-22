@@ -1,15 +1,14 @@
-const container = document.querySelector('.container');
-const registerBtn = document.querySelector('.register-btn');
-const loginBtn = document.querySelector('.login-btn');
+const container = document.querySelector(".container");
+const registerBtn = document.querySelector(".register-btn");
+const loginBtn = document.querySelector(".login-btn");
 
-registerBtn.addEventListener('click', () => {
-    container.classList.add('active');
-})
+// registerBtn.addEventListener("click", () => {
+//   container.classList.add("active");
+// });
 
-loginBtn.addEventListener('click', () => {
-    container.classList.remove('active');
-})
-
+loginBtn.addEventListener("click", () => {
+  container.classList.remove("active");
+});
 const forget = document.getElementById("loginform");
 
 forget.addEventListener("submit", forgetfum);
@@ -27,9 +26,15 @@ async function forgetfum(e) {
   };
   const response = await fetch(url, option);
   const { message, status } = await response.json();
+  //   alert(message);
   if (status === 404) {
-    
+    container.classList.remove("active")
     return alert(message);
+    
+  } else if (status === 200) {
+  container.classList.add("active");
+    // alert(message);
+    console.log("kir");
     
   }
 
