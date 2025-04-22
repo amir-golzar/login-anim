@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const findHuman = await User.findOne({ email });
   if (!findHuman) {
-    res.status(404).json({ message: "kir shodi" ,status:404});
+    res.status(404).json({ message: "kir shodi", status: 404 });
     return;
   }
   const decode = await findHuman.matchPass(password);
@@ -92,6 +92,18 @@ app.post("/login", async (req, res) => {
     res.json({ message: "are", token: jwt });
   }
   console.log(findHuman);
+});
+
+app.post("/EnterEmail", async (req, res) => {
+  const { email } = req.body;
+
+  const getEmail = await User.findOne({ email });
+
+  if (!getEmail) {
+    res.status(404).json({message:'No account exists, sign up first.',status:404})
+  }else{
+    res.status(200).json({message:"Enter the recovery code then enter the new password.",getEmail})
+  }
 });
 
 app.listen(process.env.PORT);
