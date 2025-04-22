@@ -45,3 +45,16 @@ async function submit(e) {
     )
   );
 }
+
+const forgotpass = document.getElementById("forgetpass");
+
+forgotpass.addEventListener("click", forget);
+
+function forget(e) {
+  window.location.replace(
+    window.location.href.replace(
+      "frontend/html/index.html",
+      "frontend/html/forgot.html"
+    )
+  );
+}
