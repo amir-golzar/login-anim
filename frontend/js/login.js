@@ -48,9 +48,9 @@ async function submit(e) {
 
 const forgotpass = document.getElementById("forgetpass");
 
-forgotpass.addEventListener("click", forget);
+forgotpass.addEventListener("click", forgetfum);
 
-function forget(e) {
+function forgetfum(e) {
   window.location.replace(
     window.location.href.replace(
       "frontend/html/index.html",

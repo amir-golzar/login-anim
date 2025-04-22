@@ -1,8 +1,10 @@
-const submit=document.getElementById("submit-button")
+const forget = document.getElementById("loginform");
 
-submit.addEventListener("click",forget)
+forget.addEventListener("submit", forgetfum);
 
-function forget(e) {
-    
-    
+function forgetfum(e) {
+  e.preventDefault();
+  alert(54);
+
+  // POST
 }
