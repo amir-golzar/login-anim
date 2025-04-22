@@ -1,7 +1,7 @@
 .logo {
   width: 65px;
   height: 65px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.315), rgb(0, 0, 0));
+  background: linear-gradient(115deg,#7494ec,#adbadb);
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2),
     -8px -8px 16px rgba(255, 255, 255, 0.06);
   border-radius: 20px;
@@ -48,4 +48,7 @@ a {
   padding: 20px;
   line-height: 40px;
   letter-spacing: 2px;
+}
+body{
+  background-color: #181818;
 }

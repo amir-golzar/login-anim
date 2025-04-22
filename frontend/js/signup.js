@@ -44,24 +44,3 @@ form.addEventListener("submit", async (e) => {
     )
   );
 });
-
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-
-  if (passwordRegex.test(password)) {
-    alert("پسورد معتبر است!");
-  } else {
-    let error = "";
-    if (password.length < 8) {
-      error += "پسورد باید حداقل 8 کاراکتر داشته باشد. ";
-    }
-    if (!/[a-z]/.test(password)) {
-      error += "پسورد باید حداقل یک حرف کوچک داشته باشد. ";
-    }
-    if (!/[A-Z]/.test(password)) {
-      error += "پسورد باید حداقل یک حرف بزرگ داشته باشد. ";
-    }
-    if (!/\d/.test(password)) {
-      error += "پسورد باید حداقل یک عدد داشته باشد. ";
-    }
-    errorMessage.textContent = error;
-  }
