@@ -28,14 +28,11 @@ async function forgetfum(e) {
   const { message, status } = await response.json();
   //   alert(message);
   if (status === 404) {
-    container.classList.remove("active")
+    container.classList.remove("active");
     return alert(message);
-    
   } else if (status === 200) {
-  container.classList.add("active");
+    container.classList.add("active");
     // alert(message);
-    console.log("kir");
-    
   }
 
   if (email === "") {
