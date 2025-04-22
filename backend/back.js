@@ -102,7 +102,7 @@ app.post("/EnterEmail", async (req, res) => {
   if (!getEmail) {
     res.status(404).json({message:'No account exists, sign up first.',status:404})
   }else{
-    res.status(200).json({message:"Enter the recovery code then enter the new password.",getEmail})
+    res.status(200).json({message:"Enter the recovery code then enter the new password.",status:200})
   }
 });
 

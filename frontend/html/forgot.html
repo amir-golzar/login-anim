@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>Login/Signup Form</title>
     <link rel="stylesheet" href="../scss/style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -11,6 +11,8 @@
   </head>
   <body>
     <div class="container">
+      <!-- emaillllll -->
+
       <div class="form-box login">
         <form id="loginform" action="#">
           <h1>forget password</h1>
@@ -19,8 +21,41 @@
             <i class="bx bxs-user"></i>
           </div>
 
-          <button id="button-login" type="submit" class="btn">submit</button>
+          <button id="button-login" type="submit" class="btn register-btn">
+            submit
+          </button>
           <div class="social-icons" style="padding: 20px">
+            <a href="#"><i class="bx bxl-google"></i></a>
+            <a href="#"><i class="bx bxl-facebook"></i></a>
+            <a href="#"><i class="bx bxl-github"></i></a>
+            <a href="#"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </form>
+      </div>
+      <!-- new passsss -->
+      <div class="form-box register">
+        <form id="dale" action="#">
+          <h1>Registration</h1>
+          <div class="input-box">
+            <input name="name" type="text" placeholder="Username" required />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="email" name="email" placeholder="Email" required />
+            <i class="bx bxs-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="text"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+          <button type="submit" class="btn">sign up</button>
+          <p>or register with social platforms</p>
+          <div class="social-icons">
             <a href="#"><i class="bx bxl-google"></i></a>
             <a href="#"><i class="bx bxl-facebook"></i></a>
             <a href="#"><i class="bx bxl-github"></i></a>
@@ -31,19 +66,20 @@
 
       <div class="toggle-box">
         <div class="toggle-panel toggle-left">
-          <h1 style="padding: 30px">
-            Why did you forget your password???(-_-)
-          </h1>
+          <h1>Hello, Welcome!</h1>
+          <p>Don't have an account?</p>
+          <button class="btn register-btn">Register</button>
         </div>
 
         <div class="toggle-panel toggle-right">
           <h1>Welcome Back!</h1>
           <p>Already have an account?</p>
-          <button class="btn login-btn">Login</button>
+          <button class="btn login-btn">set email</button>
         </div>
       </div>
     </div>
 
     <script src="../js/forgotpass.js"></script>
+    <script src="../js/main.js"></script>
   </body>
 </html>
