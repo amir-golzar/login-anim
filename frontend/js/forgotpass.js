@@ -34,10 +34,4 @@ async function forgetfum(e) {
   if (email === "") {
     alert("The form is empty");
   }
-  // window.location.replace(
-  //   window.location.href.replace(
-  // "frontend/html/forgot.html",
-  // "frontend/html/code&newpass.html"
-  //   )
-  // );
 }
