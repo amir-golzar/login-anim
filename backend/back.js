@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
   console.log(findHuman);
 });
 
-app.post("/EnterEmail", async (req, res) => {
+app.post("/EEGP", async (req, res) => {
   const { email } = req.body;
 
   const getEmail = await User.findOne({ email });
