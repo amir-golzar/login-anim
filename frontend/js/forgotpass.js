@@ -9,7 +9,7 @@ const forget = document.getElementById("loginform");
 
 forget.addEventListener("submit", forgetfum);
 
-const url = "http://127.0.0.1:5500/EnterEmail";
+const url = "http://127.0.0.1:5500/EEGP";
 
 async function forgetfum(e) {
   e.preventDefault();
