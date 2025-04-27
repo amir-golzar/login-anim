@@ -19,7 +19,7 @@ app.use(cors({ origin: "*" }));
 app.use(body.json());
 
 mongoose.connect(
-  `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}1234@127.0.0.1:27017/admin`
+  `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}@127.0.0.1:27017/admin`
 );
 
 const cshema = mongoose.Schema({
@@ -103,6 +103,7 @@ app.post("/EEGP", async (req, res) => {
 
   const getEmail = await User.findOne({ email });
 
+
   if (!getEmail) {
     res
       .status(404)
@@ -120,14 +121,13 @@ app.post("/EEGP", async (req, res) => {
 
     const mailOption = {
       from: `"login form" <${process.env.MAIL_FROM}>`,
-      to: "amirnpm222@gmail.com",
+      to:email,
       subject: "code forget",
       test: "your forget password code is",
       html: `</b> your forget password code is ${Math.floor(
         100000 + Math.random() * 900000
       )} </b>`,
     };
-
     transporter.sendMail(mailOption),
       (error, info) => {
         if (error) {
@@ -135,7 +135,7 @@ app.post("/EEGP", async (req, res) => {
         }
         console.log("email sent" + info.respanse);
       };
-      
+
     res.status(200).json({
       message: "Enter the recovery code then enter the new password.",
       status: 200,
