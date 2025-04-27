@@ -16,7 +16,7 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(body.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/admin");
+mongoose.connect(`mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}1234@127.0.0.1:27017/admin`);
 
 const cshema = mongoose.Schema({
   name: "String",
