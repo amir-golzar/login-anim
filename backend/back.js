@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+const nodemailer = require("nodemailer");
+
 const gt = require("./jwt/GT");
 
 const express = require("express");
@@ -16,7 +18,9 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(body.json());
 
-mongoose.connect(`mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}1234@127.0.0.1:27017/admin`);
+mongoose.connect(
+  `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}1234@127.0.0.1:27017/admin`
+);
 
 const cshema = mongoose.Schema({
   name: "String",
@@ -100,9 +104,42 @@ app.post("/EEGP", async (req, res) => {
   const getEmail = await User.findOne({ email });
 
   if (!getEmail) {
-    res.status(404).json({message:'No account exists, sign up first.',status:404})
-  }else{
-    res.status(200).json({message:"Enter the recovery code then enter the new password.",status:200})
+    res
+      .status(404)
+      .json({ message: "No account exists, sign up first.", status: 404 });
+  } else {
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: true,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD,
+      },
+    });
+
+    const mailOption = {
+      from: `"login form" <${process.env.MAIL_FROM}>`,
+      to: "amirnpm222@gmail.com",
+      subject: "code forget",
+      test: "your forget password code is",
+      html: `</b> your forget password code is ${Math.floor(
+        100000 + Math.random() * 900000
+      )} </b>`,
+    };
+
+    transporter.sendMail(mailOption),
+      (error, info) => {
+        if (error) {
+          return console.log("error " + error.message);
+        }
+        console.log("email sent" + info.respanse);
+      };
+      
+    res.status(200).json({
+      message: "Enter the recovery code then enter the new password.",
+      status: 200,
+    });
   }
 });
 
