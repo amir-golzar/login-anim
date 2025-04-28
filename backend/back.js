@@ -47,7 +47,6 @@ const Forget = mongoose.model("forget", forgetShema);
 function forgetCodeFun(e) {
   return Math.floor(100000 + Math.random() * 900000);
 }
-// const fcf=forgetCodeFun()
 
 app.post("/sing", (req, res) => {
   const { name, email, password } = req.body;
@@ -142,12 +141,11 @@ app.post("/EEGP", async (req, res) => {
         console.log("email sent" + info.respanse);
       };
     /*---------------------------------------------- */
-    // const codefarmosh = forgetCodeFun();
-    // console.log(codefarmosh);
 
     const vDate = new Date(Date.now() + 30 * 60 * 1000);
 
-    const cemail = new Forget({ email,  validDate: vDate });
+    const cemail = new Forget({ email, validDate: vDate });
+
     // const cemail = new Forget({ email, code: theCode, validDate: vDate });
     cemail.save();
     /*---------------------------------------------- */
@@ -159,12 +157,30 @@ app.post("/EEGP", async (req, res) => {
   }
 });
 app.put("/updateCode", async (req, res) => {
-  const { code, email, validDate } = req.body;
-  
-  const findforgetD = await Forget.findOne({email});
-  console.log(findforgetD);
-  const validtime=findforgetD.validDate.getTime()
-  console.log(validtime);
-  
+  const { code, email, password } = req.body;
+
+  const findforgetD = await Forget.findOne({ email });
+
+  const validTime = findforgetD.validDate.getTime();
+
+  const now = new Date().getTime();
+
+  if (now < validTime) {
+    const forgetCode = await Forget.findOne({ code: code });
+    if (forgetCode) {
+      const salt = await bcrypt.genSalt(12);
+      const hashpass = await bcrypt.hash(password, salt);
+      const updatePASS = await User.updateOne(
+        { email },
+        { $set: { password: hashpass } }
+      );
+      res.status(200).json(updatePASS);
+    }
+  } else {
+    const deleteCode = await Forget.deleteOne({ email: email });
+    console.log(deleteCode);
+    res.status(202).json({ message: "yaro pac shod", status: 202 });
+  }
 });
 app.listen(process.env.PORT);
+// 1803
