@@ -20,11 +20,11 @@ async function forgetfum(e) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: email }),
   };
-  const response = await fetch(url, option);
+  const response = await fetch(aa, option);
   const { message, status } = await response.json();
   //   alert(message);
   if (status === 404) {
-    container.classList.remove("active");
+    container.classList.add("active");
     return alert(message);
   } else if (status === 200) {
     container.classList.add("active");

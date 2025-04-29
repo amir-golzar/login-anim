@@ -28,7 +28,7 @@ const cshema = mongoose.Schema({
 });
 const forgetShema = mongoose.Schema({
   code: { type: "Number", required: true },
-  // email: { type: "String", required: true },
+  email: { type: "String", required: true },
   validDate: { type: "Date", required: true },
 });
 
@@ -144,9 +144,9 @@ app.post("/EEGP", async (req, res) => {
 
     const vDate = new Date(Date.now() + 30 * 60 * 1000);
 
-    const cemail = new Forget({ email, validDate: vDate });
+    // const cemail = new Forget({ email, validDate: vDate });
 
-    // const cemail = new Forget({ email, code: theCode, validDate: vDate });
+    const cemail = new Forget({ email, code: theCode, validDate: vDate });
     cemail.save();
     /*---------------------------------------------- */
 
@@ -170,16 +170,13 @@ app.put("/updateCode", async (req, res) => {
     if (forgetCode) {
       const salt = await bcrypt.genSalt(12);
       const hashpass = await bcrypt.hash(password, salt);
-      const updatePASS = await User.updateOne(
-        { email },
-        { $set: { password: hashpass } }
-      );
-      res.status(200).json(updatePASS);
+      const updatePASS = await User.updateOne({ email },{ $set: { password: hashpass } })
+      ;res.status(200).json(updatePASS);
     }
   } else {
     const deleteCode = await Forget.deleteOne({ email: email });
     console.log(deleteCode);
-    res.status(202).json({ message: "yaro pac shod", status: 202 });
+    res.status(500).json({ message: "yaro pac shod", status: 500 });
   }
 });
 app.listen(process.env.PORT);
