@@ -19,7 +19,7 @@ app.use(cors({ origin: "*" }));
 app.use(body.json());
 
 mongoose.connect(
-  `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}@127.0.0.1:27017/admin`
+  `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PWD}@127.0.0.1:28017/admin`
 );
 const cshema = mongoose.Schema({
   name: { type: "String", required: true },
@@ -170,8 +170,14 @@ app.put("/updateCode", async (req, res) => {
     if (forgetCode) {
       const salt = await bcrypt.genSalt(12);
       const hashpass = await bcrypt.hash(password, salt);
-      const updatePASS = await User.updateOne({ email },{ $set: { password: hashpass } })
-      ;res.status(200).json(updatePASS);
+      const updatePASS = await User.updateOne(
+        { email },
+        { $set: { password: hashpass } }
+      );
+      const deleteCode = await Forget.deleteOne({ email: email });
+      console.log(deleteCode);
+
+      res.status(200).json({ message: "user updated", status:200}, updatePASS);
     }
   } else {
     const deleteCode = await Forget.deleteOne({ email: email });
