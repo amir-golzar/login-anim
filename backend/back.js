@@ -92,11 +92,12 @@ app.get("/profile", async (req, res) => {
 });
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const findHuman = await User.findOne({ email });
+  const findHuman = await User.findOne({ email,password});
   if (!findHuman) {
     res.status(404).json({ message: "kir shodi", status: 404 });
     return;
   }
+  
   const decode = await findHuman.matchPass(password);
 
   if (decode) {

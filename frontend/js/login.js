@@ -28,7 +28,7 @@ async function submit(e) {
   const { status, token } = await response.json();
 
   if (status === 404) {
-    return alert("users is not find");
+    return alert("gmail is not find or password is fals");
   }
 
   console.log(token);

@@ -62,7 +62,7 @@ async function update(e) {
     const { message, status } = await response.json();
 
     if (status === 200) {
-      alert("kkk");
+      alert(message);
       window.location.replace(
         window.location.href.replace(
           "frontend/html/forgot.html",
