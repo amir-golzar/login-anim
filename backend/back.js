@@ -41,7 +41,7 @@ cshema.methods.matchPass = async function (enteredPass) {
   return await bcrypt.compare(enteredPass, this.password);
 };
 
-const User = mongoose.model("sing", cshema);
+const User = mongoose.model("sign-anim", cshema);
 const Forget = mongoose.model("forget", forgetShema);
 
 function forgetCodeFun(e) {
@@ -91,21 +91,36 @@ app.get("/profile", async (req, res) => {
   res.json(find);
 });
 app.post("/login", async (req, res) => {
+  // const { email, password } = req.body;
+  // const findHuman = await User.findOne({ email,password});
+  // if (!findHuman) {
+  //   res.status(404).json({ message: "kir shodi", status: 404 });
+  //   return;
+  // }
+
+  // const decode = await findHuman.matchPass(password);
+
+  // if (decode) {
+  //   console.log(decode);
+  //   const jwt = gt(findHuman._id);
+  //   res.json({ message: "are", token: jwt });
+  // }
+  // console.log(findHuman);
+
   const { email, password } = req.body;
-  const findHuman = await User.findOne({ email,password});
-  if (!findHuman) {
-    res.status(404).json({ message: "kir shodi", status: 404 });
-    return;
+  const find = await User.findOne({ email });
+  if (!find) {
+    res.status(500).json({ message: "kir shodi", status: 404 });
   }
-  
-  const decode = await findHuman.matchPass(password);
+
+  const decode = await find.matchPass(password);
 
   if (decode) {
     console.log(decode);
-    const jwt = gt(findHuman._id);
+    const jwt = gt(find._id);
     res.json({ message: "are", token: jwt });
   }
-  console.log(findHuman);
+  console.log(find);
 });
 app.post("/EEGP", async (req, res) => {
   const { email } = req.body;
@@ -178,7 +193,9 @@ app.put("/updateCode", async (req, res) => {
       const deleteCode = await Forget.deleteOne({ email: email });
       console.log(deleteCode);
 
-      res.status(200).json({ message: "user updated", status:200}, updatePASS);
+      res
+        .status(200)
+        .json({ message: "user updated", status: 200 }, updatePASS);
     }
   } else {
     const deleteCode = await Forget.deleteOne({ email: email });
